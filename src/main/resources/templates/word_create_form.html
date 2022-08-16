@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content">
+    <h5>단어등록</h5>
+    <form th:object="${wordForm}" method="post">
+        <div>
+            <label for="name">이름</label>
+            <input type="text" th:field="*{name}" name="name">
+        </div>
+        <div>
+            <label for="meaning">뜻</label>
+            <textarea name="meaning" th:field="*{meaning}" rows="2"></textarea>
+        </div>
+        <div>
+            <label for="example">예시</label>
+            <textarea name="example" th:field="*{example}" rows="4"></textarea>
+        </div>
+        <input type="submit" value="저장하기">
+    </form>
+</div>
+</html>
