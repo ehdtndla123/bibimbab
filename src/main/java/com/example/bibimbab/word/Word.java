@@ -1,5 +1,6 @@
 package com.example.bibimbab.word;
 
+import com.example.bibimbab.quiz.Quiz;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +25,9 @@ public class Word {
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;
+
+    @ManyToOne
+    private Quiz quiz;
 
     @Builder
     public Word(String name,String meaning,String example,LocalDateTime createdDate,LocalDateTime updatedDate){

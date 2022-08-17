@@ -40,6 +40,14 @@ public class WordService {
         return word.get();
     }
 
+    public String getMeaning(String name){
+        Optional<Word> word=this.wordRepository.findByName(name);
+        if(word.isPresent()){
+            return word.get().getMeaning();
+        }
+        return word.get().getMeaning();
+    }
+
     public void create(WordForm wordForm){
         Word word= Word.builder()
                 .name(wordForm.getName())
