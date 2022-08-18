@@ -20,7 +20,7 @@
 <!-- 네비게이션 바 -->
 <nav th:replace="navbar :: navbarFragment"></nav>
 <!-- header -->
-<header th:replace="header :: headerFragment"></header>
+<header th:insert="header :: headerFragment"></header>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 <th:block layout:fragment="content"></th:block>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->

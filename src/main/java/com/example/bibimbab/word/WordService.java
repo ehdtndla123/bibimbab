@@ -6,10 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.criteria.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +28,10 @@ public class WordService {
         return wordList;
     }
 
-    public Page<Word> getLists(int page){
-        Pageable pageable=PageRequest.of(page,10);
-        return this.wordRepository.findAll(pageable);
+    public Page<Word> getLists(int page,String kw){
+        Pageable pageable=PageRequest.of(page,20);
+        Specification<Word> spec=search(kw);
+        return this.wordRepository.findAll(spec,pageable);
     }
 
 
@@ -58,4 +61,21 @@ public class WordService {
         this.wordRepository.save(word);
     }
 
+    private Specification<Word> search(String kw) {
+        return new Specification<>() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public Predicate toPredicate(Root<Word> p, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true);  // 중복을 제거
+
+                return
+
+                        cb.or(cb.like(p.get("meaning"), "%" + kw + "%"),
+                                cb.like(p.get("name"), "%" + kw + "%"),
+                                cb.like(p.get("example"), "%" + kw + "%")
+                               );
+
+            }
+        };
+    }
 }

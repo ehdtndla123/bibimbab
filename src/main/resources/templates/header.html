@@ -1,4 +1,9 @@
 <!-- Masthead-->
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <header th:fragment="headerFragment" class="masthead">
     <div class="container position-relative">
         <div class="row justify-content-center">
@@ -6,15 +11,18 @@
                 <div class="text-center text-white">
                     <!-- Page heading-->
                     <h1 class="mb-5">알고싶은 신조어를 검색해 보세요!</h1>
-                    <div class="input-group">
-                        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" id="btn_search">찾기</button>
-                        </div>
+                    <form th:action="@{/word}" method="get" id="search">
+                    <div class="row-cols-auto">
+
+                            <label for="kw"></label>
+                            <input type="text" id="kw" name="kw" class="form-control form-control-lg" th:value="${kw}" placeholder="신조어를 검색하세요">
+                            <button class="btn btn-primary" type="submit">찾기</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
 </header>
+
+</html>

@@ -19,11 +19,12 @@ public class WordController {
     private final WordService wordService;
 
     @RequestMapping("")
-    public String list(Model model, @RequestParam(value = "page",defaultValue = "0")int page)
+    public String list(Model model, @RequestParam(value = "page",defaultValue = "0")int page,
+                       @RequestParam(value="kw",defaultValue = "")String kw)
                        {
 
-        Page<Word> wordList=this.wordService.getLists(page);
-
+        Page<Word> wordList=this.wordService.getLists(page,kw);
+        model.addAttribute("kw",kw);
         model.addAttribute("wordList",wordList);
         return "wordList";
     }

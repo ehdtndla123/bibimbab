@@ -14,15 +14,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MainController {
     @RequestMapping("/")
-    public String root(Model model, HttpServletRequest request){
-        HttpSession session=request.getSession();
-        SiteUser user=new SiteUser("user1",0);
-        session.setAttribute("sessionId",user);
+    public String root(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        SiteUser user = new SiteUser("user1", 0);
+        session.setAttribute("sessionId", user);
 
         return "main_page";
-    }
-    @RequestMapping("/main")
-    public String index(){
-        return "index";
+
     }
 }

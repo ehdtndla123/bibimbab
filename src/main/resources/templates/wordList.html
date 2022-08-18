@@ -30,6 +30,7 @@
         </tbody>
     </table>
     <!-- 페이징처리 시작 -->
+    <a th:id="|pageanker|" href="javascript:void(0)" type="hidden"></a>
     <div th:if="${!wordList.isEmpty()}">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${!wordList.hasPrevious} ? 'disabled'">
@@ -42,7 +43,7 @@
                 th:if="${page >= wordList.number -5 and page <= wordList.number+5}"
                 th:classappend="${page == wordList.number} ? 'active'"
                 class="page-item">
-                <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+                <a th:text="${page}"  class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
             </li>
             <li class="page-item" th:classappend="${!wordList.hasNext} ? 'disabled'">
                 <a class="page-link" href="javascript:void(0)" th:data-page="${wordList.number +1}">
@@ -52,8 +53,9 @@
         </ul>
     </div>
     <!-- 페이징처리 끝 -->
-    <form th:action="@{/word}" method="get" id="searchForm">
+    <form th:action="@{/word#pageanker}" method="get" id="searchForm">
         <input type="hidden" id="page" name="page" th:value="${wordList.number}">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
     </form>
 </div>
 
