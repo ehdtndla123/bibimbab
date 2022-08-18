@@ -18,9 +18,12 @@ public class WordController {
 
     private final WordService wordService;
 
-    @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value = "page",defaultValue = "0")int page){
+    @RequestMapping("")
+    public String list(Model model, @RequestParam(value = "page",defaultValue = "0")int page)
+                       {
+
         Page<Word> wordList=this.wordService.getLists(page);
+
         model.addAttribute("wordList",wordList);
         return "wordList";
     }
@@ -39,7 +42,7 @@ public class WordController {
         return "redirect:/";
     }
 
-    @GetMapping("/detail/{id}")
+    @RequestMapping("/detail/{id}")
     public String detail(Model model,@PathVariable("id")Integer id){
         Word word=this.wordService.getWord(id);
         model.addAttribute("word",word);

@@ -2,12 +2,33 @@
 <html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
        xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<div layout:fragment="content">
-    <a href="/word/create">단어 생성</a>
-    <a href="/word/list">모든 단어들 보기</a>
 
-    <div>
-        <a href="/quiz">퀴즈 풀기</a>
-    </div>
+<div layout:fragment="content">
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/quiz-start.jpg'); background-size: 650px 470px; cursor : pointer" onclick="location.href='/quiz'; "
+                    ></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>퀴즈 타임</h2>
+                    <p class="lead mb-0">설명란</p>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-2.jpg'); cursor : pointer" onclick="location.href='/word'; "></div>
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>단어 목록 보기</h2>
+                    <p class="lead mb-0">설명란</p>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-3.jpg'); cursor : pointer" onclick="location.href='/'; "></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>야민정음</h2>
+                    <p class="lead mb-0">설명란</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 </html>

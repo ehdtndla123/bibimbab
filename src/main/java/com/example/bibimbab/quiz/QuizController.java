@@ -21,7 +21,7 @@ public class QuizController {
 
     private final QuizService quizService;
 
-    @RequestMapping("")
+    /* @RequestMapping("")
     public String quiz_main(Model model, HttpServletRequest request){
         HttpSession session=request.getSession();
         SiteUser user=new SiteUser("user1",0);
@@ -31,12 +31,12 @@ public class QuizController {
         model.addAttribute("username",(SiteUser)session.getAttribute("sessionId"));
         return "quiz_start";
     }
-
-    @GetMapping("/start")
+*/
+    @GetMapping("")
     public String quiz_start(Model model, @RequestParam(value="quiz_number",defaultValue = "0")int quiz_number,HttpServletRequest request){
         HttpSession session= request.getSession();
         if(session.getAttribute("sessionId")==null){
-            return "redirect:/quiz";
+            return "redirect:/";
         }
         SiteUser user=(SiteUser)session.getAttribute("sessionId");
 
