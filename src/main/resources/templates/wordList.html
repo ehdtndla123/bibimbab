@@ -2,7 +2,7 @@
 <html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
     <table class="table table-hover">
         <thead class="table-dark">
         <tr class="text-center">
@@ -53,6 +53,7 @@
                 </a>
             </li>
         </ul>
+        <a th:href="@{/word/create}" class="btn btn-primary">단어 등록</a>
     </div>
     <!-- 페이징처리 끝 -->
     <form th:action="@{/word#pageanker}" method="get" id="searchForm">

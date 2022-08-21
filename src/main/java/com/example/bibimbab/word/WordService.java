@@ -33,7 +33,7 @@ public class WordService {
 
     public Page<Word> getLists(int page,String kw){
         List<Sort.Order> list=new ArrayList<>();
-        list.add(Sort.Order.desc("voter"));
+        list.add(Sort.Order.desc("createdDate"));
         Pageable pageable=PageRequest.of(page,20,Sort.by(list));
         Specification<Word> spec=search(kw);
         return this.wordRepository.findAll(spec,pageable);

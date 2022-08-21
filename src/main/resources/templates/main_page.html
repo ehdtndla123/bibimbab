@@ -6,13 +6,26 @@
 <div layout:fragment="content">
     <div class="card my-3">
         <div class="card-body">
+
             <div class="d-flex justify-content-center">
                 <h2 th:text="${user.getUsername()}+' 님 환영합니다!!' "></h2>
                 <h2 th:if="${user.getScore()!=1000}" th:text="'당신의 점수는 '+ ${user.getScore()}+' 점 입니다!'"> </h2>
             </div>
-
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+                <form th:action="@{/user/change}" method="get" id="search" >
+                    <div class="d-flex justify-content-end">
+                <label  for="username" class="btn btn-outline-dark">이름 변경 하기</label>
+                <input type="text" th:id="username" name="username">
+                    <input type="submit" value="저장하기" class="btn btn-dark">
+                    </div>
+                </form>
+        </div>
+    </div>
+
+
     <section class="showcase">
         <div class="container-fluid p-0">
             <div class="row g-0">

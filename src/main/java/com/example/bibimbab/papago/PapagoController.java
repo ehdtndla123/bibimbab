@@ -24,7 +24,7 @@ public class PapagoController {
 
     private final WordService wordService;
 
-    @RequestMapping("/croll")
+    @RequestMapping("/crollsklasdkljasfljasdkljsadljds")
     public void croll(){
         HashMap<String,String> word=new HashMap<String,String>();
         //사이트 1
