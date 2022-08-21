@@ -2,14 +2,17 @@
 <html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<div layout:fragment="content">
-    <h5>단어등록</h5>
-    <form th:object="${papagoForm}" method="post">
-        <div>
-            <label for="translation">예시</label>
-            <textarea name="translation" th:field="*{translation}" rows="4"></textarea>
+<div layout:fragment="content" class="container">
+    <h5 class="my-3 border-bottom pb-2">번역할 텍스트</h5>
+    <form th:object="${papagoForm}" method="post" th:action="@{/papago/create}">
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
         </div>
-        <input type="submit" value="저장하기">
+        <div class="mb-3">
+            <label for="translation">번역하기</label>
+            <textarea name="translation" th:field="*{translation}" rows="4" class="form-control"></textarea>
+        </div>
+        <input type="submit" value="변환하기">
     </form>
 </div>
 </html>

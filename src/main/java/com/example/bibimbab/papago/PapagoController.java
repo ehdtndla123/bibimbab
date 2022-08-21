@@ -9,8 +9,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.*;
@@ -116,32 +118,29 @@ public class PapagoController {
             this.wordService.create(new WordForm(name,meaning,example));
         }
     }
+    @GetMapping("")
+    public String start(Model model,PapagoForm papagoForm){
+        return "papago";
+    }
 
-    @RequestMapping("")
-    public String translator(@Valid PapagoForm papagoForm, BindingResult bindingResult) throws IOException {
-        if(bindingResult.hasErrors()){
-            return "papago";
-        }
-
-        // BufferedReader br = new BufferedReader(papagoForm.getTranslation());
+    @PostMapping("/create")
+    public String translator(@Valid PapagoForm papagoForm, BindingResult bindingResult,Model model) throws IOException {
         InputStream is = new ByteArrayInputStream(papagoForm.getTranslation().getBytes());
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-        String str="";
-        for(int j=0; j<sb.length();j++) {
+
+        String line="";
 
 
-            String line = br.readLine();
+        while((line=br.readLine())!=null) {
 
-            for (int i = 0; i < line.length(); i++) {
+            for(int i=0;i<line.length();i++) {
                 sb.append(trans(line.charAt(i)));
             }
-            System.out.println(sb);
-            sb.delete(0, sb.length());
         }
-        System.out.println("----------------");
-        System.out.println(sb);
-        return "redirect:/";
+        String out=sb.toString();
+        model.addAttribute("out",out);
+        return "example";
     }
 
 

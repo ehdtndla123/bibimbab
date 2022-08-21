@@ -73,8 +73,4 @@ public class QuizController {
         return "redirect:/";
     }
 
-    @RequestMapping("/example")
-    public String aqweqwe(){
-        return "example";
-    }
 }
