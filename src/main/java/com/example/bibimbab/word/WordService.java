@@ -1,6 +1,7 @@
 package com.example.bibimbab.word;
 
 
+import com.example.bibimbab.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.criteria.*;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +32,9 @@ public class WordService {
     }
 
     public Page<Word> getLists(int page,String kw){
-        Pageable pageable=PageRequest.of(page,20);
+        List<Sort.Order> list=new ArrayList<>();
+        list.add(Sort.Order.desc("voter"));
+        Pageable pageable=PageRequest.of(page,20,Sort.by(list));
         Specification<Word> spec=search(kw);
         return this.wordRepository.findAll(spec,pageable);
     }
@@ -57,9 +62,17 @@ public class WordService {
                 .meaning(wordForm.getMeaning())
                 .example(wordForm.getExample())
                 .createdDate(LocalDateTime.now())
+                .voter(0)
                 .build();
         this.wordRepository.save(word);
     }
+
+    public void vote(Word word){
+       word.setVoter(word.getVoter()+1);
+       this.wordRepository.save(word);
+    }
+
+
 
     private Specification<Word> search(String kw) {
         return new Specification<>() {

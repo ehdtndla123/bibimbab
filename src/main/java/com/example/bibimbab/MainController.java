@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 
 @RequiredArgsConstructor
 @Controller
@@ -16,8 +17,12 @@ public class MainController {
     @RequestMapping("/")
     public String root(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        SiteUser user = new SiteUser("user1", 0);
-        session.setAttribute("sessionId", user);
+        if(session.getAttribute("sessionId")==null){
+            SiteUser user = new SiteUser("아무개", 1000);
+            session.setAttribute("sessionId", user);
+        }
+        SiteUser user=(SiteUser)session.getAttribute("sessionId");
+        model.addAttribute("user",user);
 
         return "main_page";
 

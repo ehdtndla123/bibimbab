@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Setter
 public class WordForm {
     @NotEmpty(message = "단어는 필수입니다.")
-    @Size(max=10)
+    @Size(max=20)
     private String name;
 
     @NotEmpty(message = "의미는 필수입니다.")

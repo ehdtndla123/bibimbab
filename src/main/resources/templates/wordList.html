@@ -11,6 +11,7 @@
             <th>의미</th>
             <th>예제</th>
             <th>작성일시</th>
+            <th>추천수</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             <td th:text="${word.meaning}"></td>
             <td th:text="${word.example}"></td>
             <td th:text="${#temporals.format(word.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${word.voter}"></td>
         </tr>
         </tbody>
     </table>

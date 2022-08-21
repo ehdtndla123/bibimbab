@@ -1,5 +1,6 @@
 package com.example.bibimbab.word;
 
+import com.example.bibimbab.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,5 +52,16 @@ public class WordController {
         model.addAttribute("word",word);
         return "word_detail";
     }
+    @GetMapping("/vote/{id}")
+    public String vote(@PathVariable("id")Integer id){
+        Word word=this.wordService.getWord(id);
+//        HttpSession session=request.getSession();
+//        SiteUser user=new SiteUser("아무개",1000);
+//        if(session.getAttribute("sessionId")!=null){
+//            user=(SiteUser)session.getAttribute("sessionId");
+//        }
+        this.wordService.vote(word);
 
+        return String.format("redirect:/word/detail/%s",id);
+    }
 }

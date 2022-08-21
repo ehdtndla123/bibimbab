@@ -5,14 +5,13 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -41,6 +40,7 @@ public class QuizController {
         SiteUser user=(SiteUser)session.getAttribute("sessionId");
 
         List<Quiz> quizList=this.quizService.getQuizList();
+        session.setAttribute("quizList",quizList);
         model.addAttribute("quizList",quizList);
         model.addAttribute("quiz_number",quiz_number);
 
@@ -53,5 +53,28 @@ public class QuizController {
         HttpSession session=request.getSession();
         session.invalidate();
         return "asd";
+    }
+
+    @GetMapping("/submit")
+    public String quiz_end(@RequestParam HashMap<String,String> paramMap,HttpServletRequest request){
+
+        HttpSession session= request.getSession();
+        List<Quiz> quizList=(List<Quiz>)session.getAttribute("quizList");
+        SiteUser user=(SiteUser)session.getAttribute("sessionId");
+        int score=0;
+        for(int i=0;i<5;i++){
+            if(Integer.parseInt(paramMap.get(String.valueOf(i)))==quizList.get(i).getWordList().get(quizList.get(i).getAnswer()).getId()){
+                score+=20;
+            }
+        }
+        SiteUser Nuser=new SiteUser(user.getUsername(),score);
+        session.removeAttribute("sessionId");
+        session.setAttribute("sessionId",Nuser);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/example")
+    public String aqweqwe(){
+        return "example";
     }
 }

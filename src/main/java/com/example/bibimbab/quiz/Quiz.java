@@ -19,10 +19,10 @@ public class Quiz {
     @OneToMany (mappedBy = "quiz")
     private List<Word> wordList;
 
-    private String answer;
+    private int answer;
 
     @Builder
-    public Quiz(List<Word> wordList,String answer){
+    public Quiz(List<Word> wordList,int answer){
         this.wordList=wordList;
         this.answer=answer;
     }

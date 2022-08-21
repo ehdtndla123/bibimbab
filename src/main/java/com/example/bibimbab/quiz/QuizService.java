@@ -58,8 +58,13 @@ public class QuizService {
             }
             // 섞기
             Collections.shuffle(wordList);
-            Quiz quiz=new Quiz(wordList,answerWord.getName());
-            quizList.add(quiz);
+            for(int i=0; i<wordList.size(); i++){
+                if(wordList.get(i).getName().contentEquals(answerWord.getName())){
+                    Quiz quiz=new Quiz(wordList,i);
+                    quizList.add(quiz);
+                    break;
+                }
+            }
         }
 
         return quizList;

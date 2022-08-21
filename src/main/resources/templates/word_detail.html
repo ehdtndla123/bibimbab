@@ -18,8 +18,10 @@
         </div>
     </div>
             <div class="my-3">
-                <a th:href="@{|/word/detail/${word.id}|}" class="btn btn-sm btn-outline-secondary"
-                   th:text="수정"></a>
+                <a th:href="@{|/word/vote/${word.id}|}" class="recommend btn btn-sm btn-outline-secondary">
+                    추천
+                    <span class="badge rounded-pill bg-success" th:text="${word.voter}"></span>
+                </a>
             </div>
         </div>
     </div>

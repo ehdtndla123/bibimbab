@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content">
+    <h5>단어등록</h5>
+    <form th:object="${papagoForm}" method="post">
+        <div>
+            <label for="translation">예시</label>
+            <textarea name="translation" th:field="*{translation}" rows="4"></textarea>
+        </div>
+        <input type="submit" value="저장하기">
+    </form>
+</div>
+</html>
