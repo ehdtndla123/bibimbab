@@ -19,7 +19,7 @@
 
 
 
-![image-20220821204819210](/Users/changdongsoo/Library/Application Support/typora-user-images/image-20220821204819210.png)
+![image](https://user-images.githubusercontent.com/59868624/188074139-7d72933d-8699-4e7a-a933-bba5b49c58ec.png)
 
 
 
